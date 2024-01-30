@@ -11,16 +11,68 @@ body{
 }
 
 .main{
-    padding-inline-start: 130px;
-    padding-block-start: 180px;
+    padding-inline-start: 6vw;
+    padding-block-start: 8vw;
 }
 
 .brand-link{
-    font-size: 64px;
-    padding-inline-start: 130px;
+    font-size: 60px;
+    padding-inline-start: 6vw;
 }
 
-.page-link{
-    font-size: 40px !important;
+a .page-link{
+    font-size: 35px;
+    color: #F5FFFA;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    padding-inline-end: 20x;
 }
 
+a .page-link:hover{
+    text-decoration: none;
+    color: #F5FFFA;
+}
+
+div .tagline{
+    font-size: 60px;
+    font-weight: bold;
+}
+
+div .description{
+    font-size: 35px;
+}
+
+div .apply{
+    font-size: 35px;
+    border-radius: 0px;
+    padding-block: 8px;
+    padding-inline: 16px;
+    color: #F5FFFA;
+    background-color: #121212;
+    margin-top: 1.5rem;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px; 
+}
+
+div .apply:hover{
+    text-decoration: none;
+    background-color: #121212;
+    color: #F5FFFA;
+}
+
+@media only screen and (max-width: 724px) {
+    .brand-link{
+        font-size: 50px;
+    }
+    a .page-link, div .tagline, div .description, div .apply{
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 570px){
+    div .tagline > span {
+        display: block;
+    }
+}

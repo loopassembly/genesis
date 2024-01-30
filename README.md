@@ -1,4 +1,4 @@
-# Welcome to Remix!
+## Genesis
 
 - [Remix Docs](https://remix.run/docs)
 

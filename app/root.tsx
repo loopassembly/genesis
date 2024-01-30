@@ -1,6 +1,5 @@
 import stylesheet from "~/styles/global.css";
 import styles from 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap';
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -12,8 +11,8 @@ import {
 } from "@remix-run/react";
 
 export const links: LinksFunction = () => [
-  {rel:"stylesheet", href: stylesheet},
   {rel:"stylesheet", href: styles},
+  {rel:"stylesheet", href: stylesheet},
 ];
 
 export default function App() {
@@ -22,6 +21,7 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href={stylesheet}></link>
         <Meta />
         <Links />
       </head>
