@@ -1,4 +1,14 @@
+import 'package:app/screens/details_page.dart';
+import 'package:app/screens/forms_screen.dart';
+import 'package:app/screens/login_page.dart';
 import 'package:flutter/material.dart';
+
+// Third party imports
+import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+
+//screens/widgets
+import 'screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,62 +20,47 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        scaffoldBackgroundColor: Color.fromARGB(1, 12, 6, 6),
+        textTheme: GoogleFonts.spaceGroteskTextTheme().copyWith(
+          titleLarge: GoogleFonts.spaceGrotesk(
+            fontWeight: FontWeight.w400,
+            fontSize: 64,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          bodyMedium: GoogleFonts.spaceGrotesk(
+            fontWeight: FontWeight.w400,
+            fontSize: 39.75,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          bodySmall: GoogleFonts.spaceGrotesk(
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      routerConfig: GoRouter(routes: [
+        GoRoute(
+          path: "/",
+          builder: (context, state) => const MyHomePage(),
+        ),
+        GoRoute(
+          path: "/login",
+          builder: (context, state) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: "/detail",
+          builder: (context, state) => const DetailsPage(),
+        ),
+        GoRoute(
+          path: "/form",
+          builder: (context, state) => const FormsScreen(),
+        )
+      ]),
     );
   }
 }
