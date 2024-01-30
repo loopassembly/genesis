@@ -22,6 +22,7 @@ body{
 
 a .page-link{
     font-size: 35px;
+    padding-inline-end: 3px;
     color: #F5FFFA;
     text-decoration: underline;
     text-decoration-thickness: 2px;

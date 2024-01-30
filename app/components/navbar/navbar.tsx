@@ -30,7 +30,7 @@ export default function Navbar() {
           </div>
 
           <div className="offcanvas-body">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={{paddingInlineEnd: "127px"}}>
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={{paddingInlineEnd: "115px"}}>
               <li className="nav-item">
                 <a className="nav-link" href="/">
                   {" "}
