@@ -19,3 +19,9 @@
 
 # Go workspace file
 go.work
+node_modules
+
+/.cache
+/build
+/public/build
+.env

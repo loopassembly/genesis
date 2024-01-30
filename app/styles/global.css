@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
+
+body{
+    font-family: 'Space Grotesk';
+    background-color: #F5FFFA;
+}
+
+.proto-navbar{
+    background-color: #121212;
+    color: #F5FFFA;
+}
+
+.main{
+    padding-inline-start: 130px;
+    padding-block-start: 180px;
+}
+
+.brand-link{
+    font-size: 64px;
+    padding-inline-start: 130px;
+}
+
+.page-link{
+    font-size: 40px !important;
+}
+
