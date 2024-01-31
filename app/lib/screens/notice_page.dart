@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:app/screens/details_page.dart';
+import 'package:app/screens/forms_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -52,7 +52,9 @@ class _NoticePageScreenState extends State<NoticePage> {
           if (decodedResponse['message'] == 'User signup clicked') {
             print('Done');
             stopTimer();
-            
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const FormsScreen(),
+            ));
           } else if (decodedResponse['message'] == 'User not clicked') {
             // Continue making requests
             print('Continue making requests');
@@ -147,9 +149,9 @@ class _NoticePageScreenState extends State<NoticePage> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const DetailsPage(),
-                    ));
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //   builder: (context) => const DetailsPage(),
+                    // ));
                   },
                   child: Text(
                     'open inbox',
