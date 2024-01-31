@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
+  final String name;
+  final String email;
+
+  const DetailsPage({Key? key, required this.name, required this.email}) : super(key: key);
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -9,6 +12,8 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   bool _isMasked = true;
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +81,10 @@ class _DetailsPageState extends State<DetailsPage> {
                         child: Row(
                           children: [
                             Text(
-                              'name: ' + "John",
+                              'name: ' + "${widget.name}",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
-                              ),
-                            ),
-                            Text(
-                              _isMasked ? "XXXXX" : " Doe",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                backgroundColor:
-                                    _isMasked ? Colors.white : Colors.transparent,
                               ),
                             ),
                           ],
@@ -111,7 +107,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               style: TextStyle(color: Colors.white, fontSize: 25),
                             ),
                             Text(
-                              "30-2-2004",
+                              "${widget.email}",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,

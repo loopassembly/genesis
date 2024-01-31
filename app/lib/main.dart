@@ -1,4 +1,3 @@
-import 'package:app/screens/details_page.dart';
 import 'package:app/screens/forms_screen.dart';
 import 'package:app/screens/login_page.dart';
 import 'package:flutter/material.dart';
@@ -52,10 +51,10 @@ class MyApp extends StatelessWidget {
           path: "/login",
           builder: (context, state) => const LoginScreen(),
         ),
-        GoRoute(
-          path: "/detail",
-          builder: (context, state) => const DetailsPage(),
-        ),
+        // GoRoute(
+        //   path: "/detail",
+        //   builder: (context, state) => const DetailsPage(),
+        // ),
         GoRoute(
           path: "/form",
           builder: (context, state) => const FormsScreen(),

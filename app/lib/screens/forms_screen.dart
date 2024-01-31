@@ -1,3 +1,4 @@
+import 'package:app/screens/details_page.dart';
 import 'package:app/screens/notice_page.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,22 @@ class FormsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController dobController = TextEditingController();
+
+    void submitForm() {
+      String name = nameController.text;
+      String dob = dobController.text;
+
+      // Pass data to the next page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailsPage(name: name, email: dob),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Center(
         child: Padding(
@@ -26,6 +43,8 @@ class FormsScreen extends StatelessWidget {
                     child: Column(
                   children: [
                     TextFormField(
+                      style: Theme.of(context).textTheme.bodySmall,
+                      controller: nameController,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         label: Padding(
@@ -52,6 +71,8 @@ class FormsScreen extends StatelessWidget {
                       height: 16,
                     ),
                     TextFormField(
+                      style: Theme.of(context).textTheme.bodySmall,
+                      controller: dobController,
                       cursorColor: Colors.white,
                       decoration: InputDecoration(
                         label: Padding(
@@ -82,10 +103,9 @@ class FormsScreen extends StatelessWidget {
                       width: 60,
                       color: Colors.white,
                       child: IconButton(
-                        icon: Icon(Icons.arrow_forward,color: Colors.black),
+                        icon: Icon(Icons.arrow_forward, color: Colors.black),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const NoticePage()));
+                          submitForm();
                         },
                       ),
                     ),
