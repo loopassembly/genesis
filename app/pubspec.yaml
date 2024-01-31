@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^6.1.0
   go_router: ^13.1.0
   flutter_deep_linking: ^0.2.1
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:

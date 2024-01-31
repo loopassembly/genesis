@@ -13,9 +13,11 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'proto.app',
-              style: Theme.of(context).textTheme.titleLarge,
+            FittedBox(
+              child: Text(
+                'proto.app',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
             SizedBox(height: 16),
             Column(
