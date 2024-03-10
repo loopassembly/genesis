@@ -157,9 +157,9 @@ class _NoticePageScreenState extends State<NoticePage> {
                     'open inbox',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                  ),
+                  // style: ElevatedButton.styleFrom(
+                  //   primary: Colors.black,
+                  // ),
                 ),
               ),
             )

@@ -1,5 +1,8 @@
+import 'package:app/new_home_page.dart/add_id.dart';
+import 'package:app/new_home_page.dart/your_id_page.dart';
 import 'package:app/screens/forms_screen.dart';
 import 'package:app/screens/login_page.dart';
+import 'package:app/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
 // Third party imports
@@ -21,31 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: Color.fromARGB(1, 12, 6, 6),
-        textTheme: GoogleFonts.spaceGroteskTextTheme().copyWith(
-          titleLarge: GoogleFonts.spaceGrotesk(
-            fontWeight: FontWeight.w400,
-            fontSize: 64,
-            color: Color.fromARGB(255, 255, 255, 255),
-          ),
-          bodyMedium: GoogleFonts.spaceGrotesk(
-            fontWeight: FontWeight.w400,
-            fontSize: 39.75,
-            color: Color.fromARGB(255, 255, 255, 255),
-          ),
-          bodySmall: GoogleFonts.spaceGrotesk(
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-            color: Color.fromARGB(255, 255, 255, 255),
-          ),
-        ),
-      ),
+      theme: Pallete.darkModeAppTheme,
       routerConfig: GoRouter(routes: [
         GoRoute(
           path: "/",
-          builder: (context, state) => const MyHomePage(),
+          builder: (context, state) => const AddIDPage(),
         ),
         GoRoute(
           path: "/login",
