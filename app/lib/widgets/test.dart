@@ -18,7 +18,7 @@ class _TestState extends State<Test> {
     
     // Replace this with your actual API call logic 
     // Simulating API response after 2 seconds
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       _controller.add({
         "message": "User not clicked",
         "status": "success",
@@ -39,7 +39,7 @@ class _TestState extends State<Test> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Loading indicator while waiting for the API response
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           // Handle error
           return Text('Error: ${snapshot.error}');

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> postData(controller) async {
-  final String apiUrl = 'http://192.168.107.18:3000/api/auth/loginemail';
+  const String apiUrl =
+      'https://f506-14-139-187-71.ngrok-free.app/api/auth/loginemail';
   final Map<String, dynamic> data = {"email": controller};
 
   final response = await http.post(

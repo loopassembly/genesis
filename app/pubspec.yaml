@@ -40,6 +40,8 @@ dependencies:
   flutter_deep_linking: ^0.2.1
   http: ^1.2.0
   gap: ^3.0.1
+  web_socket_channel: ^2.4.4
+  local_auth: ^2.2.0
 
 dev_dependencies:
   flutter_test:

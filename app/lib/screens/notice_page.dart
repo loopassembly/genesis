@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:app/screens/forms_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:web_socket_channel/io.dart';
 
-const redundant_url =
-    'http://192.168.107.18:3000/api/auth/ClickStatus/ashutoshanand2560@gmail.com';
+const wsUrl =
+    'ws://f506-14-139-187-71.ngrok-free.app/api/auth/ws/btech15106.22@bitmesra.ac.in';
 
 class NoticePage extends StatefulWidget {
   const NoticePage({Key? key}) : super(key: key);
@@ -16,63 +13,30 @@ class NoticePage extends StatefulWidget {
 }
 
 class _NoticePageScreenState extends State<NoticePage> {
-  late StreamController<Map<String, dynamic>> _controller;
-  Timer? _timer;
+  late IOWebSocketChannel channel;
+  bool _isLoading = true;
+  String _message = '';
 
   @override
   void initState() {
     super.initState();
-    _controller = StreamController<Map<String, dynamic>>.broadcast();
-    startTimer();
+    channel = IOWebSocketChannel.connect(wsUrl);
+    channel.stream.listen(_handleMessage);
   }
 
-  void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      makeRequest();
-    });
-  }
-
-  void stopTimer() {
-    _timer?.cancel();
-  }
-
-  Future<void> makeRequest() async {
-    final apiUrl = redundant_url;
-
-    try {
-      final response = await http.get(Uri.parse(apiUrl));
-
-      if (response.statusCode == 200) {
-        final decodedResponse = jsonDecode(response.body);
-
-        _controller
-            .add(decodedResponse); // Add the decoded response to the stream
-
-        if (decodedResponse['status'] == 'success') {
-          if (decodedResponse['message'] == 'User signup clicked') {
-            print('Done');
-            stopTimer();
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const FormsScreen(),
-            ));
-          } else if (decodedResponse['message'] == 'User not clicked') {
-            // Continue making requests
-            print('Continue making requests');
-          }
-        }
+  void _handleMessage(dynamic message) {
+    setState(() {
+      if (message == "User clicked") {
+        _message = "Go to dashboard";
+        // Navigate to dashboard
+      } else if (message == "User details incomplete") {
+        _message = "Go to the signup page";
+        // Navigate to signup page
       } else {
-        print('Failed to make request. Status code: ${response.statusCode}');
+        _message = "Unknown message received: $message";
       }
-    } catch (error) {
-      print('Error: $error');
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.close();
-    stopTimer(); // Ensure to stop the timer when the widget is disposed
-    super.dispose();
+      _isLoading = false;
+    });
   }
 
   @override
@@ -107,36 +71,9 @@ class _NoticePageScreenState extends State<NoticePage> {
                 style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
-            StreamBuilder<Map<String, dynamic>>(
-              stream: _controller.stream,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Loading indicator while waiting for the API response
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  // Handle error
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  // Check the message in the API response
-                  String message = snapshot.data?["message"] ?? "";
-
-                  // If the message indicates that the login is done, navigate to the next page
-                  if (message == "User clicked") {
-                    // Replace this with your navigation logic
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => const DetailsPage()),
-                    // );
-
-                    // For demonstration purposes, just print a message
-                    print("User is logged in. Navigate to the next page.");
-                  }
-
-                  // Display the current message
-                  return Text('Message: $message');
-                }
-              },
-            ),
+            _isLoading
+                ? CircularProgressIndicator()
+                : Text('Message: $_message'),
             FittedBox(
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -149,17 +86,12 @@ class _NoticePageScreenState extends State<NoticePage> {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => const DetailsPage(),
-                    // ));
+                    // Handle button press
                   },
                   child: Text(
                     'open inbox',
                     style: TextStyle(color: Colors.white, fontSize: 25),
                   ),
-                  // style: ElevatedButton.styleFrom(
-                  //   primary: Colors.black,
-                  // ),
                 ),
               ),
             )
@@ -167,5 +99,11 @@ class _NoticePageScreenState extends State<NoticePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
   }
 }

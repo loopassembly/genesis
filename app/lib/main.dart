@@ -1,16 +1,16 @@
 import 'package:app/new_home_page.dart/add_id.dart';
-import 'package:app/new_home_page.dart/your_id_page.dart';
+import 'package:app/screens/details_page.dart';
 import 'package:app/screens/forms_screen.dart';
+import 'package:app/screens/home_page.dart';
 import 'package:app/screens/login_page.dart';
+import 'package:app/screens/notice_page.dart';
 import 'package:app/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
 // Third party imports
-import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 
 //screens/widgets
-import 'screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,11 +28,14 @@ class MyApp extends StatelessWidget {
       routerConfig: GoRouter(routes: [
         GoRoute(
           path: "/",
-          builder: (context, state) => const AddIDPage(),
+          builder: (context, state) => const DetailsPage(
+            email: "abc@xyx.com",
+            name: "John",
+          ),
         ),
         GoRoute(
           path: "/login",
-          builder: (context, state) => const LoginScreen(),
+          builder: (context, state) => const AddIDPage(),
         ),
         // GoRoute(
         //   path: "/detail",
