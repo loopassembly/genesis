@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 
 class DetailsPage extends StatefulWidget {
   final String name;
   final String email;
 
-  const DetailsPage({Key? key, required this.name, required this.email}) : super(key: key);
+  const DetailsPage({Key? key, required this.name, required this.email})
+      : super(key: key);
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -12,8 +15,37 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   bool _isMasked = true;
+  final LocalAuthentication auth = LocalAuthentication();
+  bool _supportedState = false;
 
-  
+  Future<void> _authenticate() async {
+    try {
+      bool authenticated = await auth.authenticate(
+          localizedReason: 'Scan your fingerprint to authenticate',
+          options:
+              AuthenticationOptions(stickyAuth: true, biometricOnly: true));
+      if (authenticated) {
+        print('User is authenticated');
+
+        setState(() {
+          _isMasked = !_isMasked;
+        });
+      }
+    } on PlatformException catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    LocalAuthentication auth = LocalAuthentication();
+    auth.isDeviceSupported().then((bool isSupported) => setState(() {
+          _supportedState = isSupported;
+        }));
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +53,8 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Padding(
-          padding: const EdgeInsets.all(25.0),
+        title: const Padding(
+          padding: EdgeInsets.all(25.0),
           child: Text(
             'proto.app',
             style: TextStyle(
@@ -32,7 +64,7 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1.0),
+          preferredSize: const Size.fromHeight(1.0),
           child: Container(
             color: Colors.white,
             height: 1.0,
@@ -54,7 +86,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(
                           16.0), // Replace with your desired padding
                       child: Text(
@@ -62,7 +94,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: Divider(
                         color: Colors.white, // Set divider color
@@ -70,19 +102,20 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                           12.0), // Replace with your desired padding
                       child: GestureDetector(
                         onTap: () {
+                          _authenticate();
                           setState(() {
-                            _isMasked = !_isMasked;
+                            // _isMasked = !_isMasked;
                           });
                         },
                         child: Row(
                           children: [
                             Text(
-                              'name: ' + "${widget.name}",
-                              style: TextStyle(
+                              'name: ' "${widget.name}",
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
                               ),
@@ -92,27 +125,30 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(
+                      padding: const EdgeInsets.all(
                           12.0), // Replace with your desired padding
                       child: GestureDetector(
                         onTap: () {
+                          _authenticate();
                           setState(() {
-                            _isMasked = !_isMasked;
+                            // _isMasked = !_isMasked;
                           });
                         },
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               'DOB: ',
-                              style: TextStyle(color: Colors.white, fontSize: 25),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
                             ),
                             Text(
-                              "${widget.email}",
+                              widget.email,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
-                                backgroundColor:
-                                    _isMasked ? Colors.white : Colors.transparent,
+                                backgroundColor: _isMasked
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
                             ),
                           ],
@@ -120,17 +156,18 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(
+                      padding: const EdgeInsets.fromLTRB(
                           70, 12, 0, 0), // Replace with your desired padding
                       child: GestureDetector(
                         onTap: () {
+                          _authenticate();
                           setState(() {
-                            _isMasked = !_isMasked;
+                            // _isMasked = !_isMasked;
                           });
                         },
                         child: Row(
                           children: [
-                            Text(
+                            const Text(
                               '1234-',
                               style: TextStyle(
                                 color: Colors.white,
@@ -142,8 +179,9 @@ class _DetailsPageState extends State<DetailsPage> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
-                                backgroundColor:
-                                    _isMasked ? Colors.white : Colors.transparent,
+                                backgroundColor: _isMasked
+                                    ? Colors.white
+                                    : Colors.transparent,
                               ),
                             ),
                           ],
@@ -155,9 +193,10 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
               child: Container(
-                constraints: BoxConstraints.tightFor(width: 250, height: 250.0),
+                constraints:
+                    const BoxConstraints.tightFor(width: 250, height: 250.0),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   border: Border.all(color: Colors.white, width: 1),
@@ -165,17 +204,18 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
+                      _authenticate();
                       setState(() {
-                        _isMasked = !_isMasked;
+                        // _isMasked = !_isMasked;
                       });
                     },
                     child: _isMasked
-                        ? Text(
+                        ? const Text(
                             'tap to reveal QR',
                             style: TextStyle(color: Colors.white, fontSize: 25),
                           )
-                          : null,
-                        // : Image.asset('assets/images/qr.png'),
+                        : null,
+                    // : Image.asset('assets/images/qr.png'),
                   ),
                 ),
               ),

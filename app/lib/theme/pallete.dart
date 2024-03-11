@@ -23,12 +23,10 @@ class Pallete {
     drawerTheme: const DrawerThemeData(
       backgroundColor: drawerColor,
     ),
-    colorScheme: ColorScheme.dark(
-      primary: redColor,
-    ),
-    backgroundColor: drawerColor,
     textTheme: GoogleFonts.spaceGroteskTextTheme(ThemeData.dark()
-        .textTheme), // Set Inter as the default font for dark mode
+        .textTheme), colorScheme: ColorScheme.dark(
+      primary: redColor,
+    ).copyWith(background: drawerColor), // Set Inter as the default font for dark mode
   );
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
@@ -44,11 +42,9 @@ class Pallete {
     drawerTheme: const DrawerThemeData(
       backgroundColor: whiteColor,
     ),
-    colorScheme: ColorScheme.light(
-      primary: blueColor,
-    ),
-    backgroundColor: whiteColor,
     textTheme: GoogleFonts.darkerGrotesqueTextTheme(ThemeData.light()
-        .textTheme), // Set Inter as the default font for light mode
+        .textTheme), colorScheme: ColorScheme.light(
+      primary: blueColor,
+    ).copyWith(background: whiteColor), // Set Inter as the default font for light mode
   );
 }

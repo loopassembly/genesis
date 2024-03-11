@@ -1,5 +1,4 @@
 import 'package:app/screens/details_page.dart';
-import 'package:app/screens/notice_page.dart';
 import 'package:flutter/material.dart';
 
 class FormsScreen extends StatelessWidget {
@@ -34,10 +33,10 @@ class FormsScreen extends StatelessWidget {
                 'Sign Up',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 32,
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Form(
                     child: Column(
@@ -103,7 +102,7 @@ class FormsScreen extends StatelessWidget {
                       width: 60,
                       color: Colors.white,
                       child: IconButton(
-                        icon: Icon(Icons.arrow_forward, color: Colors.black),
+                        icon: const Icon(Icons.arrow_forward, color: Colors.black),
                         onPressed: () {
                           submitForm();
                         },

@@ -19,7 +19,7 @@ class MyHomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -27,12 +27,12 @@ class MyHomePage extends StatelessWidget {
                   'manage',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'verify',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'control',
                   style: Theme.of(context).textTheme.bodyMedium,

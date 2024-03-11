@@ -29,12 +29,12 @@ class AddIDPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Spacer(),
-              Text(
+              const Spacer(),
+              const Text(
                 "register id",
                 style: TextStyle(fontSize: 32),
               ),
-              Gap(16),
+              const Gap(16),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
@@ -44,7 +44,7 @@ class AddIDPage extends StatelessWidget {
                   hintText: "unique identifier",
                 ),
               ),
-              Gap(16),
+              const Gap(16),
               TextFormField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(
@@ -54,8 +54,8 @@ class AddIDPage extends StatelessWidget {
                   hintText: "otp",
                 ),
               ),
-              Gap(8),
-              Text(
+              const Gap(8),
+              const Text(
                 "retry in 5s",
                 style: TextStyle(fontSize: 16),
               ),
@@ -79,7 +79,7 @@ class AddIDPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         )));
