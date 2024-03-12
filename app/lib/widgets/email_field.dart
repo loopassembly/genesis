@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:app/screens/notice_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> postData(controller) async {
-  final String apiUrl = 'http://192.168.107.18:3000/api/auth/loginemail';
+  final String apiUrl =
+      'https://2e5f-103-4-222-252.ngrok-free.app/api/auth/loginemail';
   final Map<String, dynamic> data = {"email": controller};
 
   final response = await http.post(
@@ -52,10 +54,12 @@ class CustomTextField extends StatelessWidget {
             icon: const Icon(Icons.arrow_right_alt),
             onPressed: () {
               postData(controller.text);
+              // print("###############################" + controller.text);
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NoticePage()),
-              );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          NoticePage(email: controller.text)));
             },
           ),
           border: const OutlineInputBorder(

@@ -1,4 +1,5 @@
 import 'package:app/screens/login_page.dart';
+import 'package:app/widgets/protoAppBar.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -7,6 +8,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: protoAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
@@ -16,7 +18,7 @@ class MyHomePage extends StatelessWidget {
             FittedBox(
               child: Text(
                 'proto.app',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: TextStyle(fontSize: 50),
               ),
             ),
             SizedBox(height: 16),
@@ -25,30 +27,28 @@ class MyHomePage extends StatelessWidget {
               children: [
                 Text(
                   'manage',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 35),
                 ),
                 SizedBox(height: 16),
                 Text(
                   'verify',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 35),
                 ),
                 SizedBox(height: 16),
                 Text(
                   'control',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 35),
                 ),
               ],
             ),
             const SizedBox(
-              height: 150
-              ,
+              height: 150,
             ),
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
               child: Container(

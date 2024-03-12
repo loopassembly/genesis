@@ -1,29 +1,67 @@
+import 'dart:convert';
+
 import 'package:app/screens/details_page.dart';
+import 'package:app/screens/login_page.dart';
 import 'package:app/screens/notice_page.dart';
+import 'package:app/widgets/protoAppBar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class FormsScreen extends StatelessWidget {
-  const FormsScreen({super.key});
+  final String email;
+  const FormsScreen({Key? key, required this.email}) : super(key: key);
 
+  final String url = "https://2e5f-103-4-222-252.ngrok-free.app/";
   @override
   Widget build(BuildContext context) {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController dobController = TextEditingController();
 
-    void submitForm() {
+    Future<void> submitForm(BuildContext context) async {
       String name = nameController.text;
       String dob = dobController.text;
 
-      // Pass data to the next page
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetailsPage(name: name, email: dob),
-        ),
+      final url =
+          "https://2e5f-103-4-222-252.ngrok-free.app/api/auth/register/vr8449@srmist.edu.in"; //$email";
+      final Map<String, String> requestBody = {
+        "Name": name,
+        "dob": dob,
+      };
+
+      final response = await http.post(
+        Uri.parse(url),
+        body: json.encode(requestBody),
+        headers: {'Content-Type': 'application/json'},
       );
+
+      if (response.statusCode == 200) {
+        // Request successful, navigate to the next page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+      } else {
+        // Request failed, handle error
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text('Failed to submit form. Please try again later.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
     }
 
     return Scaffold(
+      appBar: protoAppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(32),
@@ -105,7 +143,7 @@ class FormsScreen extends StatelessWidget {
                       child: IconButton(
                         icon: Icon(Icons.arrow_forward, color: Colors.black),
                         onPressed: () {
-                          submitForm();
+                          submitForm(context);
                         },
                       ),
                     ),
